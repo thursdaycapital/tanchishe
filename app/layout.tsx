@@ -1,12 +1,18 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import FarcasterMeta from '@/components/FarcasterMeta'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
 
 export function generateMetadata(): Metadata {
   return {
     title: 'Snake Game - Farcaster MiniApp',
     description: '复古风格的贪吃蛇游戏',
-    viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
     openGraph: {
       title: 'Snake Game',
       description: '复古风格的贪吃蛇游戏 Farcaster MiniApp',
