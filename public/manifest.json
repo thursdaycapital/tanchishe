@@ -1,0 +1,11 @@
+{
+  "name": "贪吃蛇 Snake Game",
+  "short_name": "Snake",
+  "description": "复古风格的贪吃蛇游戏 Farcaster MiniApp",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#00ff00",
+  "orientation": "portrait-primary"
+}
+

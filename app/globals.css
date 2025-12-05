@@ -1,0 +1,180 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  background: #1a1a1a;
+  color: #00ff00;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 复古 CRT 效果 */
+@keyframes scanline {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    transparent 50%,
+    rgba(0, 255, 0, 0.03) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 1000;
+  animation: scanline 8s linear infinite;
+}
+
+/* 复古按钮样式 */
+.retro-button {
+  background: #000;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  padding: 12px 24px;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.2s;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.retro-button:hover {
+  background: #00ff00;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+}
+
+.retro-button:active {
+  transform: scale(0.95);
+}
+
+/* 复古文本样式 */
+.retro-text {
+  font-family: 'Courier New', monospace;
+  color: #00ff00;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  letter-spacing: 1px;
+}
+
+/* 排行榜样式 */
+.leaderboard {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #00ff00;
+  padding: 20px;
+  margin: 20px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.leaderboard h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.leaderboard-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+  font-size: 14px;
+}
+
+.leaderboard-item:last-child {
+  border-bottom: none;
+}
+
+.leaderboard-rank {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* 游戏容器 */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.game-info {
+  display: flex;
+  gap: 30px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+/* 游戏结束弹窗 */
+.game-over-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #000;
+  border: 3px solid #00ff00;
+  padding: 30px;
+  z-index: 2000;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+  min-width: 300px;
+}
+
+.game-over-modal h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+.game-over-modal p {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.game-over-modal input {
+  background: #000;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  padding: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.game-over-modal input:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
