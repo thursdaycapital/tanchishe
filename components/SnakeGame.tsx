@@ -324,6 +324,36 @@ export default function SnakeGame({ onGameOver }: { onGameOver: (score: number) 
     document.addEventListener('touchend', handleTouchEnd, { once: true })
   }, [])
 
+  // 处理方向键按钮点击
+  const handleDirectionClick = useCallback((direction: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT') => {
+    const state = gameStateRef.current
+    if (state.gameOver || state.paused) return
+
+    // 防止反向移动
+    switch (direction) {
+      case 'UP':
+        if (state.direction !== 'DOWN') {
+          state.direction = 'UP'
+        }
+        break
+      case 'DOWN':
+        if (state.direction !== 'UP') {
+          state.direction = 'DOWN'
+        }
+        break
+      case 'LEFT':
+        if (state.direction !== 'RIGHT') {
+          state.direction = 'LEFT'
+        }
+        break
+      case 'RIGHT':
+        if (state.direction !== 'LEFT') {
+          state.direction = 'RIGHT'
+        }
+        break
+    }
+  }, [])
+
   // 重新开始游戏
   const restart = useCallback(() => {
     gameStateRef.current = {
@@ -360,11 +390,51 @@ export default function SnakeGame({ onGameOver }: { onGameOver: (score: number) 
         </button>
       )}
       {!gameOver && (
-        <div className="retro-text" style={{ fontSize: '12px', textAlign: 'center' }}>
-          Use Arrow Keys or Swipe to Control
-          <br />
-          Press Space to Pause
-        </div>
+        <>
+          <div className="retro-text" style={{ fontSize: '12px', textAlign: 'center' }}>
+            Use Arrow Keys or Swipe to Control
+            <br />
+            Press Space to Pause
+          </div>
+          {/* 方向键按钮 - 十字形布局 */}
+          <div className="direction-buttons">
+            <div className="direction-buttons-grid">
+              <div></div>
+              <button
+                className="direction-btn direction-btn-up"
+                onClick={() => handleDirectionClick('UP')}
+                aria-label="Up"
+              >
+                ↑
+              </button>
+              <div></div>
+              <button
+                className="direction-btn direction-btn-left"
+                onClick={() => handleDirectionClick('LEFT')}
+                aria-label="Left"
+              >
+                ←
+              </button>
+              <div></div>
+              <button
+                className="direction-btn direction-btn-right"
+                onClick={() => handleDirectionClick('RIGHT')}
+                aria-label="Right"
+              >
+                →
+              </button>
+              <div></div>
+              <button
+                className="direction-btn direction-btn-down"
+                onClick={() => handleDirectionClick('DOWN')}
+                aria-label="Down"
+              >
+                ↓
+              </button>
+              <div></div>
+            </div>
+          </div>
+        </>
       )}
     </div>
   )
