@@ -1,10 +1,31 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import FarcasterMeta from '@/components/FarcasterMeta'
 
-export const metadata: Metadata = {
-  title: '贪吃蛇 - Farcaster MiniApp',
-  description: '复古风格的贪吃蛇游戏',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
+export function generateMetadata(): Metadata {
+  return {
+    title: 'Snake Game - Farcaster MiniApp',
+    description: '复古风格的贪吃蛇游戏',
+    viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
+    openGraph: {
+      title: 'Snake Game',
+      description: '复古风格的贪吃蛇游戏 Farcaster MiniApp',
+      images: [
+        {
+          url: 'https://tanchishe-phi.vercel.app/snake.png',
+          width: 1200,
+          height: 630,
+          alt: 'Snake Game',
+        },
+      ],
+      type: 'website',
+      siteName: 'Snake Game',
+      url: 'https://tanchishe-phi.vercel.app',
+    },
+    other: {
+      'fc:frame': 'vNext',
+    },
+  }
 }
 
 export default function RootLayout({
@@ -14,7 +35,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh">
-      <body>{children}</body>
+      <body>
+        <FarcasterMeta />
+        {children}
+      </body>
     </html>
   )
 }
