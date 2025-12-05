@@ -18,6 +18,7 @@ interface GameState {
 
 const GRID_SIZE = 20
 const CELL_SIZE = 20
+const GAME_SPEED = 150 // 游戏速度（毫秒），数值越大越慢
 const INITIAL_SNAKE: Position[] = [
   { x: 10, y: 10 },
   { x: 10, y: 11 },
@@ -38,6 +39,7 @@ export default function SnakeGame({ onGameOver }: { onGameOver: (score: number) 
   const [gameOver, setGameOver] = useState(false)
   const [paused, setPaused] = useState(false)
   const gameLoopRef = useRef<number>()
+  const gameIntervalRef = useRef<NodeJS.Timeout>()
 
   // 生成随机食物位置
   const generateFood = useCallback((): Position => {
@@ -133,7 +135,6 @@ export default function SnakeGame({ onGameOver }: { onGameOver: (score: number) 
     const state = gameStateRef.current
 
     if (state.gameOver || state.paused) {
-      draw()
       return
     }
 
@@ -164,7 +165,6 @@ export default function SnakeGame({ onGameOver }: { onGameOver: (score: number) 
       state.gameOver = true
       setGameOver(true)
       onGameOver(state.score)
-      draw()
       return
     }
 
@@ -177,7 +177,6 @@ export default function SnakeGame({ onGameOver }: { onGameOver: (score: number) 
       state.gameOver = true
       setGameOver(true)
       onGameOver(state.score)
-      draw()
       return
     }
 
@@ -193,9 +192,7 @@ export default function SnakeGame({ onGameOver }: { onGameOver: (score: number) 
       // 移除尾部
       state.snake.pop()
     }
-
-    draw()
-  }, [draw, generateFood, onGameOver])
+  }, [generateFood, onGameOver])
 
   // 游戏循环
   useEffect(() => {
@@ -205,10 +202,22 @@ export default function SnakeGame({ onGameOver }: { onGameOver: (score: number) 
     canvas.width = GRID_SIZE * CELL_SIZE
     canvas.height = GRID_SIZE * CELL_SIZE
 
+    // 初始绘制
     draw()
 
+    // 使用 setInterval 控制游戏速度
+    gameIntervalRef.current = setInterval(() => {
+      const state = gameStateRef.current
+      if (!state.gameOver && !state.paused) {
+        update()
+      } else {
+        draw() // 即使暂停也要重绘以显示暂停状态
+      }
+    }, GAME_SPEED)
+
+    // 使用 requestAnimationFrame 进行平滑渲染
     const gameLoop = () => {
-      update()
+      draw()
       gameLoopRef.current = requestAnimationFrame(gameLoop)
     }
 
@@ -217,6 +226,9 @@ export default function SnakeGame({ onGameOver }: { onGameOver: (score: number) 
     return () => {
       if (gameLoopRef.current) {
         cancelAnimationFrame(gameLoopRef.current)
+      }
+      if (gameIntervalRef.current) {
+        clearInterval(gameIntervalRef.current)
       }
     }
   }, [draw, update])
