@@ -35,6 +35,15 @@ const nextConfig = {
         ],
       },
     ]
+  },
+  // 重写 .well-known 路径到 API 路由
+  async rewrites() {
+    return [
+      {
+        source: '/.well-known/farcaster.json',
+        destination: '/api/farcaster-config',
+      },
+    ]
   }
 }
 
