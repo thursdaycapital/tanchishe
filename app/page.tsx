@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import SnakeGame from '@/components/SnakeGame'
 import Leaderboard from '@/components/Leaderboard'
 
@@ -9,39 +9,6 @@ export default function Home() {
   const [showGameOverModal, setShowGameOverModal] = useState(false)
   const [finalScore, setFinalScore] = useState(0)
   const [leaderboardKey, setLeaderboardKey] = useState(0)
-
-  // 获取 Farcaster 用户信息
-  useEffect(() => {
-    const initFrame = async () => {
-      try {
-        // 检查是否在 Farcaster Frame 环境中
-        if (typeof window !== 'undefined' && (window as any).farcaster) {
-          const farcaster = (window as any).farcaster
-          const context = await farcaster.context
-          if (context?.user?.username) {
-            setUsername(context.user.username)
-          }
-        } else if (typeof window !== 'undefined' && (window as any).parent) {
-          // 尝试从父窗口获取 Farcaster 上下文
-          try {
-            const parent = (window as any).parent
-            if (parent.farcaster) {
-              const context = await parent.farcaster.context
-              if (context?.user?.username) {
-                setUsername(context.user.username)
-              }
-            }
-          } catch (e) {
-            // 跨域限制，忽略错误
-          }
-        }
-      } catch (error) {
-        // 非 Farcaster 环境，使用默认值
-        console.log('Not in Farcaster environment, using default username')
-      }
-    }
-    initFrame()
-  }, [])
 
   const handleGameOver = async (score: number) => {
     setFinalScore(score)

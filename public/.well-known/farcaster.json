@@ -1,10 +1,19 @@
 {
-  "version": "1.0",
-  "name": "Snake Game",
-  "description": "复古风格的贪吃蛇游戏 Farcaster MiniApp",
-  "iconUrl": "https://tanchishe-phi.vercel.app/snake.png",
-  "splashImageUrl": "https://tanchishe-phi.vercel.app/snake.png",
-  "splashBackgroundColor": "#1a1a1a",
-  "url": "https://tanchishe-phi.vercel.app"
+  "accountAssociation": {
+    "header": "eyJmaWQiOjMwNjE5MywidHlwZSI6ImF1dGgiLCJrZXkiOiIweGRDMDMzNEFmRjJDYzBEZTkwMjRkM2IzQzAwNzE5Mzc5ZDkwQkFFODUifQ",
+    "payload": "eyJkb21haW4iOiJ0YW5jaGlzaGUtOXJ0dC52ZXJjZWwuYXBwIn0",
+    "signature": "JbUl68joaIKxj+6m2EI6EN6QElqwBPNYPFjmO4Pa/UxM21PLl5AdxIkaBwNAFuXzJSlSyVAvCWNP9yPJC1Qpphw="
+  },
+  "miniapp": {
+    "version": "1",
+    "name": "Snake Game",
+    "iconUrl": "https://tanchishe-phi.vercel.app/snake.png",
+    "homeUrl": "https://tanchishe-9rtt.vercel.app/",
+    "imageUrl": "https://tanchishe-phi.vercel.app/snake.png",
+    "buttonTitle": "Snake Game",
+    "splashImageUrl": "https://tanchishe-phi.vercel.app/snake.png",
+    "splashBackgroundColor": "#1a1a1a",
+    "webhookUrl": "https://tanchishe-9rtt.vercel.app/api/webhook"
+  }
 }
 
